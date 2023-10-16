@@ -1,4 +1,4 @@
-package com.gaurav145.ecomdemo
+package com.gaurav145.ecommDemo
 
 import org.junit.Test
 

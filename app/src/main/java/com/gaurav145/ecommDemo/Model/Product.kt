@@ -1,4 +1,4 @@
-package com.gaurav145.ecomdemo.Model
+package com.gaurav145.ecommDemo.Model
 
 data class Product(
     val brand: String,

@@ -1,4 +1,4 @@
-package com.gaurav145.ecomdemo.Retrofit
+package com.gaurav145.ecommDemo.Retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

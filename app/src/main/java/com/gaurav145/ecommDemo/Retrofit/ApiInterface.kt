@@ -1,6 +1,6 @@
-package com.gaurav145.ecomdemo.Retrofit
+package com.gaurav145.ecommDemo.Retrofit
 
-import com.gaurav145.ecomdemo.Model.Products
+import com.gaurav145.ecommDemo.Model.Products
 import retrofit2.Call
 import retrofit2.http.GET
 
