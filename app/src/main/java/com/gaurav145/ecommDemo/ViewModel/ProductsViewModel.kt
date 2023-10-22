@@ -13,9 +13,9 @@ import retrofit2.Response
 class ProductsViewModel :ViewModel() {
     val productListLiveData =MutableLiveData<List<Product>>()
 
-    fun getAllProducts()
+    fun getAllProducts(limit :Int)
     {
-        RetrofitInstance.api.getProducts().enqueue(object : Callback<Products> {
+        RetrofitInstance.api.getProducts(limit).enqueue(object : Callback<Products> {
             override fun onResponse(call: Call<Products>, response: Response<Products>) {
                 if (response!=null&& response.isSuccessful)
                 {
