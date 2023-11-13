@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,7 +41,31 @@ class HomeFragment : Fragment() {
         observeAllProducts()
         prepareRecyclerView()
         onProductItemClick()
+        initSpinner()
         return binding.root
+    }
+
+    private fun initSpinner() {
+
+        val languages =  resources.getStringArray(R.array.Categories)
+
+         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, languages)
+        binding.spinnerCategories.adapter = adapter
+
+        binding.spinnerCategories.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+                Toast.makeText(requireContext(), "Selected item " + "" + languages[position], Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
+
     }
 
     private fun onProductItemClick() {

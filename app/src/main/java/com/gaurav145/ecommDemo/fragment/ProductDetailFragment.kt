@@ -15,7 +15,7 @@ import com.gaurav145.ecomdemo.R
 
 class ProductDetailFragment : Fragment() {
     private lateinit var binding: FragmentProductDetailBinding
-    private  lateinit var productDetail : Product
+    private lateinit var productDetail: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class ProductDetailFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)*/
 
-        val callback = object : OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 findNavController().navigate(R.id.action_productDetailFragment_to_homeFragment)
             }
@@ -44,18 +44,41 @@ class ProductDetailFragment : Fragment() {
         if (arguments != null)
             productDetail = (arguments?.get("ProductDetails") as Product?)!!
         init()
+        addToCart()
         return binding.root
     }
 
+    private fun addToCart() {
+        var noOfItemInCart = Integer.parseInt(binding.cartNo.text.toString());
+        binding.minusCartItem.setOnClickListener {
+            if (noOfItemInCart <= 1) {
+                // do nothing
+            }
+            else{
+                binding.cartNo.text= (noOfItemInCart-1).toString()
+            }
+        }
+        binding.addCartItem.setOnClickListener {
+                binding.cartNo.text= (noOfItemInCart+1).toString()
+        }
+
+        binding.btnAddToCart.setOnClickListener {
+            productDetail
+        }
+    }
+
     private fun init() {
-        binding.tvBrandName.text = "Brand "+productDetail.brand
+        binding.tvBrandName.text = "Brand " + productDetail.brand
         binding.tvProductName.text = productDetail.title
         Glide.with(requireContext()).load(productDetail.thumbnail).into(binding.productImage)
         binding.ratingBar.rating = productDetail.rating.toFloat()
         binding.tvFinalAmount.text = "Price: ₹" + productDetail.price.toString()
-        binding.tvDiscountValue.text = "-" + productDetail.discountPercentage.toString()+ "%"
+        binding.tvDiscountValue.text = "-" + productDetail.discountPercentage.toString() + "%"
 
-        binding.tvMrp.text = "M.R.P.: ₹"+ String.format("%.2f", (productDetail.price / (1-(productDetail.discountPercentage/100)))).toDouble()
+        binding.tvMrp.text = "M.R.P.: ₹" + String.format(
+            "%.2f",
+            (productDetail.price / (1 - (productDetail.discountPercentage / 100)))
+        ).toDouble()
         binding.tvDescriptionValue.text = productDetail.description
 
     }
